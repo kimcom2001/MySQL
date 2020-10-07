@@ -1,26 +1,28 @@
 USE test;
 CREATE TABLE address_book (
- `no` INT NOT NULL AUTO_INCREMENT,              Gyeonggi
+ `no` INT NOT NULL AUTO_INCREMENT,
  `name` VARCHAR(10) NOT NULL,
  tel VARCHAR(14),
  nickname VARCHAR(20) DEFAULT '별명',
  PRIMARY KEY(`no`)
 ) AUTO_INCREMENT=10001;
 
+---------- 코딩
+
 
 SELECT district, SUM(population), COUNT(*) FROM city WHERE countrycode LIKE 'kor'
-	GROUP BY district;
+	GROUP BY district; => 한국의 지역별로 인구 합
 
-SELECT distinct district FROM city WHERE Countrycode='KOR';
+SELECT distinct district FROM city WHERE Countrycode='KOR'; 
 
-SELECT group_concat(distinct district) FROM city WHERE Countrycode='KOR';
+SELECT group_concat(distinct district) FROM city WHERE Countrycode='KOR'; => 한줄로 표시
 
 SELECT SUM(population), countrycode FROM city 
-	GROUP BY countrycode LIMIT 10;
+	GROUP BY countrycode LIMIT 10; => group by field는 그룹을 통틀어 조건으로 함 / limit 숫자 => 조건으로부터 몇명
 
 SELECT sum(population), avg(population), countrycode, COUNT(*) FROM city 
 	GROUP BY countrycode HAVING COUNT(*) >= 10 
-	order by avg(population) desc LIMIT 10;
+	order by avg(population) desc LIMIT 10;  => order by field는 인구 평균 순서대로 (desc는 높은순, asc는 낮은 순)
 
 SELECT district AS 도시명, sum(population) AS '총 인구수', round(avg(population)) AS '인구 평균', COUNT(*) AS '도시 수' FROM city 
 	where countrycode LIKE 'KOR'GROUP BY district HAVING COUNT(*) >= 5 
