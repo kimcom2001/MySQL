@@ -1,0 +1,35 @@
+USE test;
+CREATE TABLE address_book (
+ `no` INT NOT NULL AUTO_INCREMENT,              Gyeonggi
+ `name` VARCHAR(10) NOT NULL,
+ tel VARCHAR(14),
+ nickname VARCHAR(20) DEFAULT '별명',
+ PRIMARY KEY(`no`)
+) AUTO_INCREMENT=10001;
+
+
+SELECT district, SUM(population), COUNT(*) FROM city WHERE countrycode LIKE 'kor'
+	GROUP BY district;
+
+SELECT distinct district FROM city WHERE Countrycode='KOR';
+
+SELECT group_concat(distinct district) FROM city WHERE Countrycode='KOR';
+
+SELECT SUM(population), countrycode FROM city 
+	GROUP BY countrycode LIMIT 10;
+
+SELECT sum(population), avg(population), countrycode, COUNT(*) FROM city 
+	GROUP BY countrycode HAVING COUNT(*) >= 10 
+	order by avg(population) desc LIMIT 10;
+
+SELECT district AS 도시명, sum(population) AS '총 인구수', round(avg(population)) AS '인구 평균', COUNT(*) AS '도시 수' FROM city 
+	where countrycode LIKE 'KOR'GROUP BY district HAVING COUNT(*) >= 5 
+	order by avg(population) DESC LIMIT 5;
+
+UPDATE city
+	SET NAME = 'Gimpo', population = 250000,
+	WHERE id=4080;
+
+CREATE TABLE citycopy LIKE city;
+SHOW TABLES; (파일만 생성한 후 데이터는 별도로 이동시켜야 한다.)
+
